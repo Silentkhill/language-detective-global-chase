@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Language Detective: Global Chase</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div id="game-container">
+        <!-- Login and User Profile Section -->
+        <div id="user-section" class="screen">
+            <div class="user-profile">
+                <div id="login-form">
+                    <h2>Bienvenue, Detective!</h2>
+                    <div class="form-group">
+                        <label for="username">Username</label>
+                        <input type="text" id="username" name="username">
+                    </div>
+                    <div class="form-group">
+                        <label for="grade-level">Grade Level</label>
+                        <select id="grade-level" name="grade-level">
+                            <option value="5">Grade 5 (Beginner)</option>
+                            <option value="6">Grade 6 (Beginner)</option>
+                            <option value="7">Grade 7 (Intermediate)</option>
+                            <option value="8">Grade 8 (Intermediate)</option>
+                            <option value="9">Grade 9 (Advanced)</option>
+                            <option value="10">Grade 10 (Advanced)</option>
+                        </select>
+                    </div>
+                    <button id="start-game" class="btn-primary">Start Game</button>
+                    <div id="teacher-login">
+                        <a href="#" id="teacher-login-link">Teacher Login</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Game Intro Screen -->
+        <div id="intro-screen" class="screen hidden">
+            <div class="intro-content">
+                <div id="agency-logo"></div>
+                <h1>Language Detective</h1>
+                <h2>Global Chase</h2>
+                <p>Welcome to the International Detective Agency, Agent!</p>
+                <p>Your mission is to track down international art thieves across French-speaking regions.</p>
+                <p>You'll need to use your French language skills to interview witnesses and gather clues.</p>
+                <button id="view-cases" class="btn-primary">View Cases</button>
+            </div>
+        </div>
+
+        <!-- Case Selection Screen -->
+        <div id="case-selection" class="screen hidden">
+            <h2>Open Cases</h2>
+            <div class="cases-container">
+                <!-- Case cards will be generated here -->
+            </div>
+        </div>
+
+        <!-- Case Briefing Screen -->
+        <div id="case-briefing" class="screen hidden">
+            <div id="case-file">
+                <div class="case-header">
+                    <h2>Case File: <span id="case-title">The Missing Mona Lisa</span></h2>
+                    <div class="difficulty-indicator">
+                        <span id="difficulty-level">Beginner</span>
+                    </div>
+                </div>
+                <div class="case-description">
+                    <div id="case-image"></div>
+                    <div id="case-details">
+                        <p id="case-text">A famous artwork has been stolen from the Louvre Museum in Paris. Witnesses saw someone suspicious leaving the scene. Your mission is to track down the thief and recover the stolen painting.</p>
+                        <div class="learning-objectives">
+                            <h3>Learning Objectives:</h3>
+                            <ul id="learning-objectives-list">
+                                <li>Basic description vocabulary</li>
+                                <li>Simple present tense questions</li>
+                                <li>Cultural knowledge about Paris</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <button id="start-investigation" class="btn-primary">Begin Investigation</button>
+            </div>
+        </div>
+
+        <!-- Game Play Screen -->
+        <div id="gameplay-screen" class="screen hidden">
+            <div class="header-bar">
+                <div class="location-info">
+                    <span id="current-location">Paris, France</span>
+                </div>
+                <div class="player-stats">
+                    <div class="stat-item">
+                        <i class="fas fa-star"></i>
+                        <span id="player-score">0</span>
+                    </div>
+                    <div class="stat-item">
+                        <i class="fas fa-clock"></i>
+                        <span id="time-remaining">20:00</span>
+                    </div>
+                </div>
+            </div>
+            <div class="main-content">
+                <div id="scene-container">
+                    <div id="scene-image"></div>
+                    <div id="character-container">
+                        <div id="character-image"></div>
+                        <div id="dialog-box">
+                            <p id="character-dialog">Bonjour! Puis-je vous aider?</p>
+                            <div id="dialog-translation" class="hidden">Hello! Can I help you?</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="interaction-panel">
+                    <div id="clue-container">
+                        <h3>Clues Found:</h3>
+                        <ul id="clues-list"></ul>
+                    </div>
+                    <div id="speech-controls">
+                        <button id="toggle-translation" class="btn-secondary">
+                            <i class="fas fa-language"></i> Show Translation
+                        </button>
+                        <div id="speech-container">
+                            <button id="speak-button" class="btn-primary">
+                                <i class="fas fa-microphone"></i> Ask a Question
+                            </button>
+                            <div id="speech-feedback">
+                                <p id="recognized-speech"></p>
+                                <p id="pronunciation-feedback"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bar">
+                <div id="question-suggestions">
+                    <h4>Suggested Questions:</h4>
+                    <div class="suggestion-buttons">
+                        <button class="suggestion">Avez-vous vu quelqu'un de suspect?</button>
+                        <button class="suggestion">Comment était cette personne?</button>
+                        <button class="suggestion">Où est-il allé?</button>
+                    </div>
+                </div>
+                <div id="navigation-controls">
+                    <button id="map-button" class="btn-secondary">
+                        <i class="fas fa-map-marked-alt"></i> Map
+                    </button>
+                    <button id="notebook-button" class="btn-secondary">
+                        <i class="fas fa-book"></i> Notebook
+                    </button>
+                    <button id="help-button" class="btn-secondary">
+                        <i class="fas fa-question-circle"></i> Help
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Map Screen -->
+        <div id="map-screen" class="screen hidden">
+            <h2>Travel Map</h2>
+            <div id="world-map"></div>
+            <div id="location-options">
+                <!-- Locations will be generated here -->
+            </div>
+            <button id="close-map" class="btn-secondary">Close Map</button>
+        </div>
+
+        <!-- Notebook Screen -->
+        <div id="notebook-screen" class="screen hidden">
+            <div class="notebook-container">
+                <div class="notebook-header">
+                    <h2>Detective Notebook</h2>
+                </div>
+                <div class="notebook-tabs">
+                    <button class="tab-btn active" data-tab="clues">Clues</button>
+                    <button class="tab-btn" data-tab="vocabulary">Vocabulary</button>
+                    <button class="tab-btn" data-tab="suspect">Suspect</button>
+                </div>
+                <div class="notebook-content">
+                    <div id="clues-tab" class="tab-content active">
+                        <h3>Clues Collected</h3>
+                        <ul class="notebook-clues-list">
+                            <!-- Clues will be listed here -->
+                        </ul>
+                    </div>
+                    <div id="vocabulary-tab" class="tab-content">
+                        <h3>New Vocabulary</h3>
+                        <div class="vocabulary-list">
+                            <!-- Vocabulary will be listed here -->
+                        </div>
+                    </div>
+                    <div id="suspect-tab" class="tab-content">
+                        <h3>Suspect Profile</h3>
+                        <div class="suspect-profile">
+                            <div class="suspect-image"></div>
+                            <div class="suspect-details">
+                                <div class="suspect-characteristic">
+                                    <span class="label">Hair:</span>
+                                    <span class="value">?</span>
+                                </div>
+                                <div class="suspect-characteristic">
+                                    <span class="label">Height:</span>
+                                    <span class="value">?</span>
+                                </div>
+                                <div class="suspect-characteristic">
+                                    <span class="label">Clothing:</span>
+                                    <span class="value">?</span>
+                                </div>
+                                <div class="suspect-characteristic">
+                                    <span class="label">Interests:</span>
+                                    <span class="value">?</span>
+                                </div>
+                                <div class="suspect-characteristic">
+                                    <span class="label">Next Destination:</span>
+                                    <span class="value">?</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button id="close-notebook" class="btn-secondary">Close Notebook</button>
+            </div>
+        </div>
+
+        <!-- Help Screen -->
+        <div id="help-screen" class="screen hidden">
+            <div class="help-container">
+                <h2>Help Guide</h2>
+                <div class="help-section">
+                    <h3>How to Play</h3>
+                    <p>1. Interview witnesses by speaking French into your microphone.</p>
+                    <p>2. Collect clues about the thief's appearance, interests, and next destination.</p>
+                    <p>3. Travel to new locations based on the clues you find.</p>
+                    <p>4. Update your suspect profile in your notebook.</p>
+                    <p>5. When you have enough information, try to catch the thief!</p>
+                </div>
+                <div class="help-section">
+                    <h3>Speaking Tips</h3>
+                    <p>- Speak clearly into your microphone</p>
+                    <p>- Use complete sentences when possible</p>
+                    <p>- Try the suggested questions if you're not sure what to ask</p>
+                    <p>- Look at your vocabulary list for words you've learned</p>
+                </div>
+                <div class="help-section">
+                    <h3>Useful Phrases</h3>
+                    <div class="phrase-list">
+                        <div class="phrase-item">
+                            <div class="french">Avez-vous vu quelqu'un de suspect?</div>
+                            <div class="english">Did you see someone suspicious?</div>
+                        </div>
+                        <div class="phrase-item">
+                            <div class="french">Comment était cette personne?</div>
+                            <div class="english">What did this person look like?</div>
+                        </div>
+                        <div class="phrase-item">
+                            <div class="french">Où est-il allé?</div>
+                            <div class="english">Where did he go?</div>
+                        </div>
+                    </div>
+                </div>
+                <button id="close-help" class="btn-secondary">Return to Game</button>
+            </div>
+        </div>
+
+        <!-- Case Completion Screen -->
+        <div id="case-complete" class="screen hidden">
+            <div class="completion-container">
+                <h2>Case Solved!</h2>
+                <div class="thief-caught">
+                    <div id="thief-image"></div>
+                    <p>You caught the thief and recovered the stolen item!</p>
+                </div>
+                <div class="performance-summary">
+                    <h3>Your Performance</h3>
+                    <div class="stat-row">
+                        <span class="label">Clues Found:</span>
+                        <span id="clues-found" class="value">8/10</span>
+                    </div>
+                    <div class="stat-row">
+                        <span class="label">Vocabulary Mastered:</span>
+                        <span id="vocab-mastered" class="value">15</span>
+                    </div>
+                    <div class="stat-row">
+                        <span class="label">Pronunciation Score:</span>
+                        <span id="pronunciation-score" class="value">85%</span>
+                    </div>
+                    <div class="stat-row">
+                        <span class="label">Grammar Accuracy:</span>
+                        <span id="grammar-score" class="value">78%</span>
+                    </div>
+                    <div class="stat-row">
+                        <span class="label">Time Taken:</span>
+                        <span id="time-taken" class="value">18:24</span>
+                    </div>
+                </div>
+                <div class="rewards">
+                    <h3>Rewards Earned</h3>
+                    <div class="reward-items">
+                        <div class="reward-item">
+                            <div class="reward-icon detective-badge"></div>
+                            <span class="reward-name">Junior Detective Badge</span>
+                        </div>
+                        <div class="reward-item">
+                            <div class="reward-icon coins"></div>
+                            <span class="reward-name">250 Detective Coins</span>
+                        </div>
+                        <div class="reward-item">
+                            <div class="reward-icon mystery-box"></div>
+                            <span class="reward-name">1 Mystery Package</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="next-actions">
+                    <button id="customize-detective" class="btn-secondary">Customize Detective</button>
+                    <button id="view-vocabulary" class="btn-secondary">Review Vocabulary</button>
+                    <button id="next-case" class="btn-primary">Next Case</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Teacher Dashboard (simplified version) -->
+        <div id="teacher-dashboard" class="screen hidden">
+            <div class="dashboard-header">
+                <h2>Teacher Dashboard</h2>
+                <button id="close-dashboard" class="btn-secondary">Logout</button>
+            </div>
+            <div class="dashboard-content">
+                <div class="dashboard-section">
+                    <h3>Student Progress</h3>
+                    <div class="student-list">
+                        <!-- Student list will be generated here -->
+                    </div>
+                </div>
+                <div class="dashboard-section">
+                    <h3>Class Management</h3>
+                    <button id="create-class" class="btn-secondary">Create Class</button>
+                    <button id="assign-case" class="btn-secondary">Assign Case</button>
+                    <button id="generate-report" class="btn-secondary">Generate Report</button>
+                </div>
+                <div class="dashboard-section">
+                    <h3>Case Customization</h3>
+                    <button id="customize-case" class="btn-secondary">Create Custom Case</button>
+                    <button id="adjust-difficulty" class="btn-secondary">Adjust Difficulty</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Load scripts -->
+    <script src="js/speech-recognition.js"></script>
+    <script src="js/game-data.js"></script>
+    <script src="js/ui-controller.js"></script>
+    <script src="js/game-controller.js"></script>
+</body>
+</html>
